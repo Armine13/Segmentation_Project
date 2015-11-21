@@ -1,0 +1,42 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="icons/TangoMFK">
+    <file alias="index.theme">icons/TangoMFK/index.theme</file>
+
+    <file alias="16x16/exit.png">icons/TangoMFK/16x16/exit.png</file>
+    <file alias="22x22/exit.png">icons/TangoMFK/22x22/exit.png</file>
+    <file alias="32x32/exit.png">icons/TangoMFK/32x32/exit.png</file>
+
+    <file alias="16x16/document-close.png">icons/TangoMFK/16x16/document-close.png</file>
+    <file alias="22x22/document-close.png">icons/TangoMFK/22x22/document-close.png</file>
+    <file alias="32x32/document-close.png">icons/TangoMFK/32x32/document-close.png</file>
+
+    <file alias="16x16/document-open.png">icons/TangoMFK/16x16/document-open.png</file>
+    <file alias="22x22/document-open.png">icons/TangoMFK/22x22/document-open.png</file>
+    <file alias="32x32/document-open.png">icons/TangoMFK/32x32/document-open.png</file>
+
+    <file alias="16x16/document-new.png">icons/TangoMFK/16x16/document-new.png</file>
+    <file alias="22x22/document-new.png">icons/TangoMFK/22x22/document-new.png</file>
+    <file alias="32x32/document-new.png">icons/TangoMFK/32x32/document-new.png</file>
+
+    <file alias="16x16/document-save-as.png">icons/TangoMFK/16x16/document-save-as.png</file>
+    <file alias="22x22/document-save-as.png">icons/TangoMFK/22x22/document-save-as.png</file>
+    <file alias="32x32/document-save-as.png">icons/TangoMFK/32x32/document-save-as.png</file>
+
+    <file alias="16x16/edit-redo.png">icons/TangoMFK/16x16/edit-redo.png</file>
+    <file alias="22x22/edit-redo.png">icons/TangoMFK/22x22/edit-redo.png</file>
+    <file alias="32x32/edit-redo.png">icons/TangoMFK/32x32/edit-redo.png</file>
+
+    <file alias="16x16/edit-undo.png">icons/TangoMFK/16x16/edit-undo.png</file>
+    <file alias="22x22/edit-undo.png">icons/TangoMFK/22x22/edit-undo.png</file>
+    <file alias="32x32/edit-undo.png">icons/TangoMFK/32x32/edit-undo.png</file>
+
+    <file alias="16x16/start.png">icons/TangoMFK/16x16/start.png</file>
+    <file alias="22x22/start.png">icons/TangoMFK/22x22/start.png</file>
+    <file alias="32x32/start.png">icons/TangoMFK/32x32/start.png</file>
+
+    <file alias="16x16/image-x-generic.png">icons/TangoMFK/16x16/image-x-generic.png</file>
+    <file alias="22x22/image-x-generic.png">icons/TangoMFK/22x22/image-x-generic.png</file>
+    <file alias="32x32/image-x-generic.png">icons/TangoMFK/32x32/image-x-generic.png</file>
+
+</qresource>
+</RCC>
