@@ -1,6 +1,10 @@
 // Scribble QT example
-#include <QtWidgets>
-
+//#include <QtWidgets>
+#include <QImage>
+#include <QString>
+#include <QDebug>
+#include <QMouseEvent>
+#include <QPainter>
 #include "scribblearea.h"
 
 //! [0]

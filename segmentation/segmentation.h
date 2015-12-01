@@ -4,6 +4,7 @@
 #include <string>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <Eigen/Dense>
 //#include <eigen-eigen-b30b87236a1b/Eigen>
 #include <Eigen/Sparse>
@@ -43,7 +44,8 @@ private:
     Mat originalImage;
     Eigen::Matrix<char, Eigen::Dynamic, Eigen::Dynamic> seed;
 
-    Mat segmentedImage;
+//    Mat segmentationImage;
+    Eigen::VectorXd segmentationMatrix;
     Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> w; //weights
     Eigen::SparseMatrix<double> W_mat; //sparse matrix of weights
 

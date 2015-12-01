@@ -11,7 +11,8 @@ QVector< QColor> SegmentationMarkerWidget::colorList = QVector<QColor >()<<Qt::r
 QColor SegmentationMarkerWidget::getColorFromIndex(int index)
 {//takes an index and returns the color of the marker by that index
 
-    int n = colorList.length();
+//    int n = colorList.length();
+    int n = colorList.size();
 
     //If index out of range return blank QColor
     if (index < 0 || index > n)

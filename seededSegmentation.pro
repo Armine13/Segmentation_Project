@@ -32,13 +32,17 @@ FORMS    += GUI/mainwindow.ui \
 RESOURCES += \
     GUI/tangomfk.qrc
 
-INCLUDEPATH += /home/armine/eigen-eigen-b30b87236a1b
+CONFIG += link_pkgconfig
+PKGCONFIG += opencv eigen3
 
-INCLUDEPATH += /usr/local/include/opencv2
-INCLUDEPATH += /usr/local/include/opencv
-INCLUDEPATH +=/usr/local/include/opencv2/core
-INCLUDEPATH +=/usr/local/include/opencv2/imgproc
-INCLUDEPATH +=/usr/local/include/opencv2/ml
-INCLUDEPATH +=/usr/local/include/opencv2/highgui
-LIBS += -L/usr/local/lib -lopencv_core -lopencv_highgui
+#INCLUDEPATH += /home/armine/eigen-eigen-b30b87236a1b
+#INCLUDEPATH += /home/masters/eigen-eigen-b30b87236a1b
+
+#INCLUDEPATH += /usr/local/include/opencv2
+#INCLUDEPATH += /usr/local/include/opencv
+#INCLUDEPATH +=/usr/local/include/opencv2/core
+#INCLUDEPATH +=/usr/local/include/opencv2/imgproc
+#INCLUDEPATH +=/usr/local/include/opencv2/ml
+#INCLUDEPATH +=/usr/local/include/opencv2/highgui
+#LIBS += -L/usr/local/lib -lopencv_core -lopencv_highgui
 

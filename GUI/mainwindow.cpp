@@ -133,13 +133,16 @@ void MainWindow::on_tabWidget_tabCloseRequested(int index)
     //delete object
     delete tabsVector[index];
     //remove tab from tabsVector
-    tabsVector.removeAt(index);
+    tabsVector.remove(index);
 
     openTabsN--;
 
     //if no open tabs left, disable action "open image"
     if (openTabsN == 0)
-        ui->actionLoadImage->setDisabled(true);
+    {
+        qDebug()<<"no open tabs";
+//        ui->actionLoadImage->setDisabled(true);
+    }
 }
 
 void MainWindow::on_actionExit_triggered()
