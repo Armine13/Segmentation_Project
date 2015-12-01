@@ -96,6 +96,7 @@ QImage Segmentation::getSegmentedImage()
                 segmentedImages[1].at<Vec3b>(y, x) = getIntensity(y, x);
 
         }
+    cv::cvtColor(segmentationMatrix, cimg, CV_GRAY2RGB);
     QVector<QImage> convertedIMages;
     for(int i = 0; i < nSeeds; i++)
         convertedIMages.append(cvMatToQImage(segmentedImages[i]));
