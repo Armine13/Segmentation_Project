@@ -8,10 +8,10 @@
 #include <QDebug>
 #include <algorithm>
 #include <Eigen/Dense>
-#include <Eigen/SparseCholesky>
-#include <Eigen/SparseCore>
-
-#include <Eigen/IterativeLinearSolvers>
+//#include <Eigen/SparseCholesky>
+//#include <Eigen/SparseCore>
+#include <opencv2/core/eigen.hpp>
+//#include <Eigen/IterativeLinearSolvers>
 #include <Eigen/Cholesky>
 
 //Eigen/include/src/IterativeLinearSolvers/BiCGSTAB.h
@@ -35,7 +35,7 @@ Segmentation::Segmentation(String imageFile, String seedFile)
 
     assert(!originalImage.empty());
     assert(!seedImage.empty());
-    segmentationMatrix = VectorXd();
+    segmentationMatrix = Mat( originalImage.size(), originalImage.type());
 //    segmentedImage = Mat( originalImage.size(), originalImage.type());
 //    segmentedImage.setTo(cv::Scalar(255, 255, 255));
     QElapsedTimer myTimer;
@@ -61,12 +61,13 @@ int Segmentation::getImgCols() const
 {
     return originalImage.cols;
 }
-QImage Segmentation::getSegmentedImage()
+void Segmentation::getSegmentedImage(QVector<QImage> &segmentedQImages, QImage& contourQImage)
 {
     int rows = getImgRows();
     int cols = getImgCols();
-    int size = rows*cols;
+
     QVector<Mat > segmentedImages;
+    qDebug()<<"nseeds"<<nSeeds;
     for(int i = 0; i < nSeeds; i++)
     {
         segmentedImages.append(Mat( originalImage.size(), originalImage.type()));
@@ -75,35 +76,33 @@ QImage Segmentation::getSegmentedImage()
     Mat mytemp = Mat( originalImage.size(), originalImage.type());
     mytemp.setTo(cv::Scalar(255, 255, 255));
 
-    //    Mat segmentedImage = Mat( originalImage.size(), originalImage.type());
-    //    segmentedImage
-    //            http://stackoverflow.com/questions/5026965/how-to-convert-an-opencv-cvmat-to-qimage
-    //    QImage imgOut= QImage((uchar*) segmentedImage.data, segmentedImage.cols, segmentedImage.rows, segmentedImage.step, QImage::Format_RGB888);
-
-    // thresholding the values of segmentationMatrix with th = mean of seedValue
-
+    //If no seed given exit
+    if (nSeeds == 0) return;
     if (nSeeds == 2)
-        for(int i = 0; i < size; i++)
-        {
-            int y = i / cols;
-            int x = i % cols;
-            if (segmentationMatrix(i) >= 1.5)
+        for(int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++ )
             {
-                segmentedImages[0].at<Vec3b>(y, x) = getIntensity(y, x);
-                mytemp.at<Vec3b>(y, x) = getIntensity(y, x);
+                if (segmentationMatrix.at<double>(i, j) >= 1.5)
+                {
+                    segmentedImages[0].at<Vec3b>(i, j) = getIntensity(i,j);
+                    mytemp.at<Vec3b>(i,j) = getIntensity(i,j);
+                }
+                else
+                    segmentedImages[1].at<Vec3b>(i,j) = getIntensity(i,j);
             }
-            else
-                segmentedImages[1].at<Vec3b>(y, x) = getIntensity(y, x);
+    //Find contours and return the image with drawn contours
+    Mat contourIm;
+    getImageWithContour(segmentationMatrix, originalImage, contourIm);
 
-        }
-    cv::cvtColor(segmentationMatrix, cimg, CV_GRAY2RGB);
-    QVector<QImage> convertedIMages;
+    //Save two segmentation images(one for background, one for foreground) into a QVector segmentedQImages
+     segmentedQImages.clear();
     for(int i = 0; i < nSeeds; i++)
-        convertedIMages.append(cvMatToQImage(segmentedImages[i]));
+        segmentedQImages.push_back(cvMatToQImage(segmentedImages[i]));
 
-    return cvMatToQImage(segmentedImages[1]);
-
+    //Convert the contour image into a QImage
+    contourQImage = cvMatToQImage(contourIm);
 }
+
 QImage  cvMatToQImage( const Mat &inMat )
 //independent function that converts Mat into QImage
 //http://asmaloney.com/2013/11/code/converting-between-cvmat-and-qimage-or-qpixmap/
@@ -267,6 +266,7 @@ bool Segmentation::readSeeds(const Mat &seedImage)
             }
         }
     nSeeds = s.size(); // number of seed classes(2 for basic case)
+    qDebug()<<"in readseeds "<<nSeeds;
     return true;
 }
 
@@ -334,25 +334,46 @@ bool Segmentation::minimizeEnergy()
     qDebug()<<"compute "<<myTimer.elapsed();
 
     myTimer.restart();
-//    VectorXd v;
 
-    segmentationMatrix.resize(size);
-    segmentationMatrix = ldlt.solve(b);
-//    v.resize(size);
-//    v = ldlt.solve(b);
+    VectorXd segmentationVector;
+    segmentationVector.resize(size);
+    segmentationVector = ldlt.solve(b);
+    //reshape into a matrix
+    eigen2cv(segmentationVector,segmentationMatrix);
+    segmentationMatrix = segmentationMatrix.reshape(0,rows);
 
     qDebug()<<" solved "<<myTimer.elapsed();
 
-//    // thresholding the values of v with th = mean of seedValue
-//    for(int i = 0; i < size; i++)
-//    {
-//        if (v(i) >= 1.5)
-//        {
-//            int y = i / cols;
-//            int x = i % cols;
-//            segmentedImage.at<Vec3b>(y, x) = getIntensity(y, x);
-//        }
-//    }
-    //imshow("asdf",segmentedImage);
     return true;
+}
+void Segmentation::getImageWithContour(const Mat& classes, const Mat& image, Mat& contourIm)
+{
+    //    Find countours by first using Canny edge detection, then cv::findContours
+
+        int lowThreshold = 1;
+        int ratio = 3;
+        int kernel_size = 3;
+
+        //Edge Detection
+        Mat edgesImage = Mat( image.size(), image.type());
+        edgesImage.setTo(cv::Scalar(255, 255, 255));
+        //copy 'classes' to be able to modify
+        Mat classes2 = segmentationMatrix;
+        classes2.convertTo(classes2, CV_8U);//conversion required for Canny
+        //Canny Edge detection
+        Canny(classes2, edgesImage, lowThreshold, lowThreshold*ratio, kernel_size );
+
+        //Finding contours
+        vector<vector<Point> > contours;
+        vector<Vec4i> hierarchy;
+         findContours( edgesImage, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+
+         contourIm = image;
+
+         // Draw contours
+         Scalar color = Scalar( 0, 0,255 ); //red
+         for( int i = 0; i< contours.size(); i++ )
+              drawContours( contourIm, contours, i, color, 2, 8, hierarchy, 0, Point() );
+
+         //http://docs.opencv.org/2.4/doc/tutorials/imgproc/shapedescriptors/find_contours/find_contours.html
 }

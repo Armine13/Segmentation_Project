@@ -32,17 +32,19 @@ FORMS    += GUI/mainwindow.ui \
 RESOURCES += \
     GUI/tangomfk.qrc
 
-CONFIG += link_pkgconfig
-PKGCONFIG += opencv eigen3
+#Linux
+#CONFIG += link_pkgconfig
+#PKGCONFIG += opencv #eigen3
 
+INCLUDEPATH += C:\opencv-mingw\eigen-eigen-c58038c56923
 #INCLUDEPATH += /home/armine/eigen-eigen-b30b87236a1b
 #INCLUDEPATH += /home/masters/eigen-eigen-b30b87236a1b
 
-#INCLUDEPATH += /usr/local/include/opencv2
-#INCLUDEPATH += /usr/local/include/opencv
-#INCLUDEPATH +=/usr/local/include/opencv2/core
-#INCLUDEPATH +=/usr/local/include/opencv2/imgproc
-#INCLUDEPATH +=/usr/local/include/opencv2/ml
-#INCLUDEPATH +=/usr/local/include/opencv2/highgui
-#LIBS += -L/usr/local/lib -lopencv_core -lopencv_highgui
+
+#Windows
+INCLUDEPATH += C:\opencv-mingw\eigen-eigen-c58038c56923
+
+INCLUDEPATH += C:\opencv-mingw\install\include
+LIBS += -L"C:/opencv-mingw/install/x64/mingw/bin"
+LIBS += -lopencv_core2410 -lopencv_highgui2410 -lopencv_imgproc2410
 

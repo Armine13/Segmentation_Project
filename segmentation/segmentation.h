@@ -1,5 +1,6 @@
 #ifndef SEGMENTATION_H
 #define SEGMENTATION_H
+//#define EIGEN_YES_I_KNOW_SPARSE_MODULE_IS_NOT_STABLE_YET
 #include <QImage>
 #include <string>
 #include <opencv2/core/core.hpp>
@@ -22,7 +23,7 @@ public:
     Segmentation(String, String);
     ~Segmentation();
 
-    QImage getSegmentedImage();
+    void getSegmentedImage(QVector<QImage>&, QImage&);
     double getWeights(int, int) const;
     int getImgRows() const;
     int getImgCols() const;
@@ -31,6 +32,7 @@ public:
     int getSeedFromVector(int) const;
 
     int getSeedNumber() const;
+    void getImageWithContour(const Mat& classes, const Mat& image, Mat& contourImage);
 
 private:
     bool computeWeights();
@@ -45,7 +47,7 @@ private:
     Eigen::Matrix<char, Eigen::Dynamic, Eigen::Dynamic> seed;
 
 //    Mat segmentationImage;
-    Eigen::VectorXd segmentationMatrix;
+    Mat segmentationMatrix;
     Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> w; //weights
     Eigen::SparseMatrix<double> W_mat; //sparse matrix of weights
 

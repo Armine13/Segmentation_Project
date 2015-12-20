@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../Segmentation_Project -I. -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv2 -I/usr/local/include/opencv -I/usr/local/include/opencv2/core -I/usr/local/include/opencv2/imgproc -I/usr/local/include/opencv2/ml -I/usr/local/include/opencv2/highgui -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. -I. -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../../Segmentation_Project -I. -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv -I/usr/local/include -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. -I. -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/armine/Qt/5.5/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = seededSegmentation1.0.0
 DISTDIR = /home/armine/Documents/MSCV1/SE/Segmentation_Project/build-seededSegmentation-Desktop_Qt_5_5_1_GCC_64bit-Debug/.tmp/seededSegmentation1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/armine/Qt/5.5/gcc_64 -Wl,-rpath,/home/armine/Qt/5.5/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/usr/local/lib -lopencv_core -lopencv_highgui -L/home/armine/Qt/5.5/gcc_64/lib -lQt5Widgets -L/usr/lib64 -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) /usr/local/lib/libopencv_calib3d.so /usr/local/lib/libopencv_contrib.so /usr/local/lib/libopencv_core.so /usr/local/lib/libopencv_features2d.so /usr/local/lib/libopencv_flann.so /usr/local/lib/libopencv_gpu.so /usr/local/lib/libopencv_highgui.so /usr/local/lib/libopencv_imgproc.so /usr/local/lib/libopencv_legacy.so /usr/local/lib/libopencv_ml.so /usr/local/lib/libopencv_nonfree.so /usr/local/lib/libopencv_objdetect.so /usr/local/lib/libopencv_ocl.so /usr/local/lib/libopencv_photo.so /usr/local/lib/libopencv_stitching.so /usr/local/lib/libopencv_superres.so /usr/local/lib/libopencv_ts.a /usr/local/lib/libopencv_video.so /usr/local/lib/libopencv_videostab.so -ltbb -lrt -lm -ldl -L/home/armine/Qt/5.5/gcc_64/lib -lQt5Widgets -L/usr/lib64 -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -196,6 +196,7 @@ DIST          = /home/armine/Qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/default_pre.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/resolve_config.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/default_post.prf \
+		/home/armine/Qt/5.5/gcc_64/mkspecs/features/link_pkgconfig.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/warn_on.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/qt.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/resources.prf \
@@ -372,6 +373,7 @@ Makefile: ../seededSegmentation.pro /home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/default_pre.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/resolve_config.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/default_post.prf \
+		/home/armine/Qt/5.5/gcc_64/mkspecs/features/link_pkgconfig.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/warn_on.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/qt.prf \
 		/home/armine/Qt/5.5/gcc_64/mkspecs/features/resources.prf \
@@ -512,6 +514,7 @@ Makefile: ../seededSegmentation.pro /home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++
 /home/armine/Qt/5.5/gcc_64/mkspecs/features/default_pre.prf:
 /home/armine/Qt/5.5/gcc_64/mkspecs/features/resolve_config.prf:
 /home/armine/Qt/5.5/gcc_64/mkspecs/features/default_post.prf:
+/home/armine/Qt/5.5/gcc_64/mkspecs/features/link_pkgconfig.prf:
 /home/armine/Qt/5.5/gcc_64/mkspecs/features/warn_on.prf:
 /home/armine/Qt/5.5/gcc_64/mkspecs/features/qt.prf:
 /home/armine/Qt/5.5/gcc_64/mkspecs/features/resources.prf:
@@ -730,7 +733,7 @@ moc_mainwindow.cpp: /home/armine/Qt/5.5/gcc_64/include/QtWidgets/QMainWindow \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/QImage \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/QPoint \
 		../GUI/mainwindow.h
-	/home/armine/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/armine/Documents/MSCV1/SE/Segmentation_Project -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv2 -I/usr/local/include/opencv -I/usr/local/include/opencv2/core -I/usr/local/include/opencv2/imgproc -I/usr/local/include/opencv2/ml -I/usr/local/include/opencv2/highgui -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/mainwindow.h -o moc_mainwindow.cpp
+	/home/armine/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/armine/Documents/MSCV1/SE/Segmentation_Project -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv -I/usr/local/include -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/mainwindow.h -o moc_mainwindow.cpp
 
 moc_markerbutton.cpp: /home/armine/Qt/5.5/gcc_64/include/QtWidgets/QToolButton \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtoolbutton.h \
@@ -838,7 +841,7 @@ moc_markerbutton.cpp: /home/armine/Qt/5.5/gcc_64/include/QtWidgets/QToolButton \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvector2d.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
 		../GUI/markerbutton.h
-	/home/armine/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/armine/Documents/MSCV1/SE/Segmentation_Project -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv2 -I/usr/local/include/opencv -I/usr/local/include/opencv2/core -I/usr/local/include/opencv2/imgproc -I/usr/local/include/opencv2/ml -I/usr/local/include/opencv2/highgui -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/markerbutton.h -o moc_markerbutton.cpp
+	/home/armine/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/armine/Documents/MSCV1/SE/Segmentation_Project -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv -I/usr/local/include -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/markerbutton.h -o moc_markerbutton.cpp
 
 moc_scribblearea.cpp: /home/armine/Qt/5.5/gcc_64/include/QtGui/QColor \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qcolor.h \
@@ -946,7 +949,7 @@ moc_scribblearea.cpp: /home/armine/Qt/5.5/gcc_64/include/QtGui/QColor \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvector2d.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
 		../GUI/scribblearea.h
-	/home/armine/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/armine/Documents/MSCV1/SE/Segmentation_Project -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv2 -I/usr/local/include/opencv -I/usr/local/include/opencv2/core -I/usr/local/include/opencv2/imgproc -I/usr/local/include/opencv2/ml -I/usr/local/include/opencv2/highgui -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/scribblearea.h -o moc_scribblearea.cpp
+	/home/armine/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/armine/Documents/MSCV1/SE/Segmentation_Project -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv -I/usr/local/include -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/scribblearea.h -o moc_scribblearea.cpp
 
 moc_segmentationmarkerwidget.cpp: ../GUI/markerbutton.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QToolButton \
@@ -1067,7 +1070,7 @@ moc_segmentationmarkerwidget.cpp: ../GUI/markerbutton.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlayoutitem.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgridlayout.h \
 		../GUI/segmentationmarkerwidget.h
-	/home/armine/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/armine/Documents/MSCV1/SE/Segmentation_Project -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv2 -I/usr/local/include/opencv -I/usr/local/include/opencv2/core -I/usr/local/include/opencv2/imgproc -I/usr/local/include/opencv2/ml -I/usr/local/include/opencv2/highgui -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/segmentationmarkerwidget.h -o moc_segmentationmarkerwidget.cpp
+	/home/armine/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/armine/Documents/MSCV1/SE/Segmentation_Project -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv -I/usr/local/include -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/segmentationmarkerwidget.h -o moc_segmentationmarkerwidget.cpp
 
 moc_tab.cpp: ../GUI/scribblearea.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/QColor \
@@ -1176,7 +1179,7 @@ moc_tab.cpp: ../GUI/scribblearea.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvector2d.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
 		../GUI/tab.h
-	/home/armine/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/armine/Documents/MSCV1/SE/Segmentation_Project -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv2 -I/usr/local/include/opencv -I/usr/local/include/opencv2/core -I/usr/local/include/opencv2/imgproc -I/usr/local/include/opencv2/ml -I/usr/local/include/opencv2/highgui -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/tab.h -o moc_tab.cpp
+	/home/armine/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/armine/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/armine/Documents/MSCV1/SE/Segmentation_Project -I/home/armine/eigen-eigen-b30b87236a1b -I/usr/local/include/opencv -I/usr/local/include -I/home/armine/Qt/5.5/gcc_64/include -I/home/armine/Qt/5.5/gcc_64/include/QtWidgets -I/home/armine/Qt/5.5/gcc_64/include/QtGui -I/home/armine/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/tab.h -o moc_tab.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1199,9 +1202,11 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-main.o: ../main.cpp /home/armine/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qapplication.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcoreapplication.h \
+main.o: ../main.cpp ../GUI/mainwindow.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QMainWindow \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qwidget.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qwindowdefs.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qglobal.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qconfig.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfeatures.h \
@@ -1230,16 +1235,17 @@ main.o: ../main.cpp /home/armine/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qglobalstatic.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmutex.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qnumeric.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qnamespace.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobject.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstring.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qchar.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qbytearray.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qrefcount.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qnamespace.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qarraydata.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstringbuilder.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobject.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobjectdefs.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qlist.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qalgorithms.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qiterator.h \
@@ -1254,17 +1260,11 @@ main.o: ../main.cpp /home/armine/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcontainerfwd.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qisenum.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobject_impl.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qeventloop.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qwindowdefs.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qpoint.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsize.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qcursor.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qwidget.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmargins.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpaintdevice.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qrect.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsize.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qpoint.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpalette.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qcolor.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qrgb.h \
@@ -1290,6 +1290,7 @@ main.o: ../main.cpp /home/armine/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qfontmetrics.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qfontinfo.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qcursor.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qkeysequence.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qevent.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qvariant.h \
@@ -1305,6 +1306,34 @@ main.o: ../main.cpp /home/armine/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvector2d.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qicon.h \
+		../GUI/segmentationmarkerwidget.h \
+		../GUI/markerbutton.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QToolButton \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtoolbutton.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QWidget \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/QColor \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QSpinBox \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qspinbox.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvalidator.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qregularexpression.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QHBoxLayout \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlayout.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgridlayout.h \
+		../GUI/tab.h \
+		../GUI/scribblearea.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/QImage \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/QPoint \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qapplication.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qeventloop.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qguiapplication.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qinputmethod.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../main.cpp
@@ -1437,17 +1466,52 @@ mainwindow.o: ../GUI/mainwindow.cpp ../GUI/mainwindow.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/QImage \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/QPoint \
 		ui_mainwindow.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/QVariant \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QAction \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qaction.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qapplication.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qeventloop.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qguiapplication.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qinputmethod.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QButtonGroup \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QHeaderView \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qframe.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qslider.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstyle.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QMenu \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qmenu.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QMenuBar \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qmenubar.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QStatusBar \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstatusbar.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QTabWidget \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QToolBar \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtoolbar.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QVBoxLayout \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QFileDialog \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qfiledialog.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qdir.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfileinfo.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/QDebug \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QTabWidget \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QInputDialog \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qinputdialog.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlineedit.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qframe.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextcursor.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextformat.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpen.h \
@@ -1562,14 +1626,13 @@ markerbutton.o: ../GUI/markerbutton.cpp ../GUI/markerbutton.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o markerbutton.o ../GUI/markerbutton.cpp
 
-scribblearea.o: ../GUI/scribblearea.cpp /home/armine/Qt/5.5/gcc_64/include/QtWidgets/QtWidgets \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QtWidgetsDepends \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QtCore \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QtCoreDepends \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qabstractanimation.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobject.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobjectdefs.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qnamespace.h \
+scribblearea.o: ../GUI/scribblearea.cpp /home/armine/Qt/5.5/gcc_64/include/QtGui/QImage \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qimage.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtransform.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qmatrix.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpolygon.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qvector.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qalgorithms.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qglobal.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qconfig.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfeatures.h \
@@ -1598,415 +1661,84 @@ scribblearea.o: ../GUI/scribblearea.cpp /home/armine/Qt/5.5/gcc_64/include/QtWid
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qglobalstatic.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmutex.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qnumeric.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstring.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qchar.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qbytearray.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qiterator.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qlist.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qrefcount.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qarraydata.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstringbuilder.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qlist.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qalgorithms.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qiterator.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qbytearray.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qnamespace.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstring.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qchar.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstringbuilder.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstringlist.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qregexp.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstringmatcher.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcoreevent.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qpoint.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qrect.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmargins.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsize.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qregion.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qdatastream.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qiodevice.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobject.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcoreevent.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmetatype.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qvarlengtharray.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcontainerfwd.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qisenum.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobject_impl.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qanimationgroup.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qparallelanimationgroup.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qpauseanimation.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qpropertyanimation.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qvariantanimation.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qeasingcurve.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qvector.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qpoint.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qvariant.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmap.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qpair.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qline.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpainterpath.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qrgb.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpixelformat.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/QString \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/QDebug \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qdebug.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qhash.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmap.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qtextstream.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qiodevice.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qlocale.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qvariant.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qshareddata.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qset.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsequentialanimationgroup.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qtextcodec.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qendian.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qlibraryinfo.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qdatetime.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qbuffer.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qdatastream.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qdir.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfileinfo.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfile.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qdiriterator.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfileselector.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QObject \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QStringList \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfilesystemwatcher.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qlockfile.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qloggingcategory.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qprocess.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qresource.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsavefile.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsettings.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstandardpaths.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstorageinfo.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qtemporarydir.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QScopedPointer \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qtemporaryfile.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/QMouseEvent \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qevent.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qkeysequence.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qurl.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/qurlquery.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qabstractitemmodel.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qabstractproxymodel.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qidentityproxymodel.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qitemselectionmodel.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsortfilterproxymodel.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstringlistmodel.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qjsonarray.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qjsonvalue.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qjsondocument.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qjsonobject.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qabstracteventdispatcher.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qeventloop.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qbasictimer.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcoreapplication.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmath.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmetaobject.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmimedata.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qobjectcleanuphandler.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qpointer.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsharedpointer.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsharedmemory.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsignalmapper.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsocketnotifier.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsystemsemaphore.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qtimer.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qtranslator.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qwineventnotifier.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmimedatabase.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmimetype.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfactoryinterface.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qlibrary.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qplugin.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qpluginloader.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/quuid.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qabstractstate.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qabstracttransition.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qeventtransition.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfinalstate.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qhistorystate.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsignaltransition.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstate.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstatemachine.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qexception.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfuture.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfutureinterface.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qrunnable.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qresultstore.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfuturesynchronizer.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfuturewatcher.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qreadwritelock.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsemaphore.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qthread.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qthreadpool.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qthreadstorage.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qwaitcondition.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qarraydataops.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qarraydatapointer.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qbitarray.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qbytearraymatcher.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcache.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcollator.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcommandlineoption.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcommandlineparser.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcryptographichash.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qelapsedtimer.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qline.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qlinkedlist.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmargins.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qmessageauthenticationcode.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qqueue.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qrect.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsize.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qregularexpression.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qscopedvaluerollback.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qstack.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qtextboundaryfinder.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qtimeline.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qtimezone.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qxmlstream.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qtcoreversion.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QtGui \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QtGuiDepends \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qaccessible.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qcolor.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qrgb.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qevent.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qwindowdefs.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qregion.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qkeysequence.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfile.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvector2d.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qaccessiblebridge.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qaccessibleobject.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qaccessibleplugin.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qbitmap.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpixmap.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpaintdevice.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qimage.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtransform.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qmatrix.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpolygon.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpainterpath.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpixelformat.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qicon.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qiconengine.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qiconengineplugin.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qimageiohandler.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qimagereader.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qimagewriter.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qmovie.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpicture.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpictureformatplugin.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpixmapcache.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qstandarditemmodel.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qbrush.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qfont.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qclipboard.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qcursor.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qdrag.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qgenericplugin.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qgenericpluginfactory.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qguiapplication.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qinputmethod.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qoffscreensurface.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qsurface.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qsurfaceformat.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglcontext.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QSurfaceFormat \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopengl.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/qt_windows.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopengles2ext.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglext.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglversionfunctions.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglwindow.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QPaintDeviceWindow \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpaintdevicewindow.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QWindow \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qwindow.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QEvent \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QMargins \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QRect \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QPaintDevice \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QOpenGLContext \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QImage \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpalette.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qrasterwindow.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qscreen.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QList \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QSize \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QSizeF \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QTransform \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qsessionmanager.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qstylehints.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qgenericmatrix.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qmatrix4x4.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvector3d.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvector4d.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qquaternion.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglbuffer.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopengldebug.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglframebufferobject.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglfunctions.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglpaintdevice.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglpixeltransferoptions.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QSharedDataPointer \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglshaderprogram.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopengltexture.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopengltimerquery.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qopenglvertexarrayobject.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qbackingstore.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpagedpaintdevice.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpagelayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpagesize.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpaintengine.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/QPainter \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpainter.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpixmap.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qcolor.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextoption.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpen.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qbrush.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qfontinfo.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qfont.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qfontmetrics.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpdfwriter.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qabstracttextdocumentlayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextlayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextformat.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qglyphrun.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qrawfont.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qfontdatabase.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextcursor.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextdocument.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qstatictext.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qsyntaxhighlighter.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextobject.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextdocumentfragment.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextdocumentwriter.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtextlist.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtexttable.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qdesktopservices.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvalidator.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtguiversion.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qaccessiblewidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qcolordialog.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qwidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qsizepolicy.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qerrormessage.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qfiledialog.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qfilesystemmodel.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qfontdialog.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qinputdialog.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlineedit.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qframe.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qmessagebox.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qprogressdialog.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qwizard.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicseffect.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicsanchorlayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicsitem.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicslayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicsgridlayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicsitemanimation.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicslinearlayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicsproxywidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicswidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicsscene.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicssceneevent.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicstransform.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QVector3D \
-		/home/armine/Qt/5.5/gcc_64/include/QtGui/QMatrix4x4 \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgraphicsview.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qscrollarea.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstyleoption.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qslider.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractslider.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstyle.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtabbar.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qrubberband.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractitemview.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qcolumnview.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdatawidgetmapper.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdirmodel.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qfileiconprovider.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qheaderview.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qitemdelegate.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qitemeditorfactory.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlistview.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlistwidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstyleditemdelegate.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtableview.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtablewidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtreeview.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtreewidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtreewidgetitemiterator.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qaction.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qactiongroup.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qapplication.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qboxlayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgridlayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qformlayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QLayout \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgesture.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgesturerecognizer.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qopenglwidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QWidget \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qshortcut.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstackedlayout.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtooltip.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qwhatsthis.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qwidgetaction.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qkeyeventtransition.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qmouseeventtransition.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qcommonstyle.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdrawutil.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qproxystyle.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QCommonStyle \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstylefactory.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstylepainter.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstyleplugin.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qcolormap.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qcompleter.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qscroller.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QPointF \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QScrollerProperties \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qscrollerproperties.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QMetaType \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QVariant \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qsystemtrayicon.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qundogroup.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qundostack.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qundoview.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractbutton.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qbuttongroup.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qcalendarwidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qcheckbox.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qcombobox.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qcommandlinkbutton.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qpushbutton.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdatetimeedit.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdial.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdockwidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qfocusframe.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qfontcombobox.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgroupbox.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qkeysequenceedit.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlabel.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlcdnumber.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qmdiarea.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qmdisubwindow.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qmenu.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qmenubar.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qplaintextedit.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtextedit.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qprogressbar.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qradiobutton.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qscrollbar.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qsizegrip.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qspinbox.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qsplashscreen.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qsplitter.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstackedwidget.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstatusbar.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtextbrowser.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtoolbar.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtoolbox.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtoolbutton.h \
-		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtwidgetsversion.h \
 		../GUI/scribblearea.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/QColor \
-		/home/armine/Qt/5.5/gcc_64/include/QtCore/QPoint
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/QPoint \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QWidget \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qwidget.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpalette.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qcursor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scribblearea.o ../GUI/scribblearea.cpp
 
 segmentationmarkerwidget.o: ../GUI/segmentationmarkerwidget.cpp ../GUI/segmentationmarkerwidget.h \
@@ -2240,6 +1972,318 @@ tab.o: ../GUI/tab.cpp ../GUI/tab.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvector2d.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
 		ui_tab.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/QVariant \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QAction \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qaction.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qicon.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qapplication.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qeventloop.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qguiapplication.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qinputmethod.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QButtonGroup \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QFrame \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qframe.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QGridLayout \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qgridlayout.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlayout.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QHBoxLayout \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QHeaderView \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtGui/qvalidator.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtCore/qregularexpression.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qslider.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qstyle.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QLabel \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qlabel.h \
+		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QSpacerItem \
+		../segmentation/segmentation.h \
+		/usr/local/include/opencv2/core/core.hpp \
+		/usr/local/include/opencv2/core/types_c.h \
+		/usr/local/include/opencv2/core/version.hpp \
+		/usr/local/include/opencv2/core/operations.hpp \
+		/usr/local/include/opencv2/core/mat.hpp \
+		/usr/local/include/opencv2/highgui/highgui.hpp \
+		/usr/local/include/opencv2/highgui/highgui_c.h \
+		/usr/local/include/opencv2/core/core_c.h \
+		/usr/local/include/opencv2/imgproc/imgproc.hpp \
+		/usr/local/include/opencv2/imgproc/types_c.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Dense \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Core \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/DisableStupidWarnings.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/Macros.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/MKL_support.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/Constants.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/ForwardDeclarations.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/Meta.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/StaticAssert.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/XprHelper.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/Memory.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/NumTraits.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/MathFunctions.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/GenericPacketMath.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/arch/SSE/PacketMath.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/arch/SSE/MathFunctions.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/arch/SSE/Complex.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/arch/AltiVec/PacketMath.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/arch/AltiVec/Complex.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/arch/NEON/PacketMath.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/arch/NEON/Complex.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/arch/Default/Settings.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Functors.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/DenseCoeffsBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/DenseBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/plugins/BlockMethods.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/MatrixBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/plugins/CommonCwiseUnaryOps.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/plugins/CommonCwiseBinaryOps.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/plugins/MatrixCwiseUnaryOps.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/plugins/MatrixCwiseBinaryOps.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/EigenBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Assign.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/BlasUtil.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/DenseStorage.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/NestByValue.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/ForceAlignedAccess.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/ReturnByValue.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/NoAlias.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/PlainObjectBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Matrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Array.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/CwiseBinaryOp.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/CwiseUnaryOp.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/CwiseNullaryOp.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/CwiseUnaryView.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/SelfCwiseBinaryOp.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Dot.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/StableNorm.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/MapBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Stride.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Map.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Block.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/VectorBlock.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Ref.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Transpose.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/DiagonalMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Diagonal.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/DiagonalProduct.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/PermutationMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Transpositions.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Redux.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Visitor.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Fuzzy.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/IO.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Swap.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/CommaInitializer.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Flagged.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/ProductBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/GeneralProduct.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/TriangularMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/SelfAdjointView.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/GeneralBlockPanelKernel.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/Parallelizer.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/CoeffBasedProduct.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/GeneralMatrixVector.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/GeneralMatrixMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/SolveTriangular.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/SelfadjointMatrixVector.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/SelfadjointMatrixMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/SelfadjointProduct.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/SelfadjointRank2Update.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/TriangularMatrixVector.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/TriangularMatrixMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/TriangularSolverMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/TriangularSolverVector.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/BandMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/CoreIterators.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/BooleanRedux.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Select.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/VectorwiseOp.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Random.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Replicate.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Reverse.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/ArrayBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/plugins/ArrayCwiseUnaryOps.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/plugins/ArrayCwiseBinaryOps.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/ArrayWrapper.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/GeneralMatrixMatrix_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/GeneralMatrixVector_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/SelfadjointMatrixMatrix_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/SelfadjointMatrixVector_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/TriangularMatrixMatrix_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/TriangularMatrixVector_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/products/TriangularSolverMatrix_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/Assign_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/GlobalFunctions.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/ReenableStupidWarnings.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Eigen2Support \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Macros.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Memory.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Meta.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Lazy.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Cwise.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/CwiseOperators.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/TriangularSolver.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Block.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/VectorBlock.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Minor.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/MathFunctions.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/LU \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/misc/Solve.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/misc/Kernel.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/misc/Image.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/LU/FullPivLU.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/LU/PartialPivLU.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/LU/PartialPivLU_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/LU/Determinant.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/LU/Inverse.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/LU/arch/Inverse_SSE.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/LU.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Cholesky \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Cholesky/LLT.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Cholesky/LDLT.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Cholesky/LLT_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/QR \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Jacobi \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Jacobi/Jacobi.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Householder \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Householder/Householder.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Householder/HouseholderSequence.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Householder/BlockHouseholder.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/QR/HouseholderQR.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/QR/FullPivHouseholderQR.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/QR/ColPivHouseholderQR.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/QR/HouseholderQR_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/QR/ColPivHouseholderQR_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/QR.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Eigenvalues \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Geometry \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/SVD \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SVD/JacobiSVD.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SVD/JacobiSVD_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SVD/UpperBidiagonalization.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/SVD.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/OrthoMethods.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/EulerAngles.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/Homogeneous.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/RotationBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/Rotation2D.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/Quaternion.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/AngleAxis.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/Transform.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/Translation.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/Scaling.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/Hyperplane.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/ParametrizedLine.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/AlignedBox.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/Umeyama.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Geometry/arch/Geometry_SSE.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/All.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/RotationBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/Rotation2D.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/Quaternion.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/AngleAxis.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/Transform.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/Translation.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/Scaling.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/AlignedBox.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/Hyperplane.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/Tridiagonalization.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/RealSchur.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/HessenbergDecomposition.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/EigenSolver.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/ComplexSchur.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/ComplexEigenSolver.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/RealQZ.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/RealSchur_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/ComplexSchur_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_MKL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Sparse \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/SparseCore \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseUtil.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseMatrixBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/CompressedStorage.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/AmbiVector.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/MappedSparseMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseVector.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseBlock.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseTranspose.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseCwiseUnaryOp.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseCwiseBinaryOp.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseDot.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparsePermutation.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseRedux.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseFuzzy.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseSparseProductWithPruning.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseProduct.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseDenseProduct.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseDiagonalProduct.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseTriangularView.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseSelfAdjointView.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/TriangularSolver.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseView.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/OrderingMethods \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/OrderingMethods/Amd.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/NonMPL2.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/OrderingMethods/Ordering.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/OrderingMethods/Eigen_Colamd.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/SparseCholesky \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/misc/SparseSolve.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCholesky/SimplicialCholesky.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/SparseLU \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_gemm_kernel.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_Structs.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLUImpl.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseCore/SparseColEtree.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_Memory.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_relax_snode.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_pivotL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_panel_dfs.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_kernel_bmod.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_panel_bmod.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_column_dfs.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_column_bmod.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_pruneL.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU_Utils.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseLU/SparseLU.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/SparseQR \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/SparseQR/SparseQR.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/IterativeLinearSolvers \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
+		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtCore/QDebug \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/QFileDialog \
 		/home/armine/Qt/5.5/gcc_64/include/QtWidgets/qfiledialog.h \
@@ -2324,6 +2368,16 @@ segmentation.o: ../segmentation/segmentation.cpp ../segmentation/segmentation.h 
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpaintdevice.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qrgb.h \
 		/home/armine/Qt/5.5/gcc_64/include/QtGui/qpixelformat.h \
+		/usr/local/include/opencv2/core/core.hpp \
+		/usr/local/include/opencv2/core/types_c.h \
+		/usr/local/include/opencv2/core/version.hpp \
+		/usr/local/include/opencv2/core/operations.hpp \
+		/usr/local/include/opencv2/core/mat.hpp \
+		/usr/local/include/opencv2/highgui/highgui.hpp \
+		/usr/local/include/opencv2/highgui/highgui_c.h \
+		/usr/local/include/opencv2/core/core_c.h \
+		/usr/local/include/opencv2/imgproc/imgproc.hpp \
+		/usr/local/include/opencv2/imgproc/types_c.h \
 		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Dense \
 		/home/armine/eigen-eigen-b30b87236a1b/Eigen/Core \
 		/home/armine/eigen-eigen-b30b87236a1b/Eigen/src/Core/util/DisableStupidWarnings.h \

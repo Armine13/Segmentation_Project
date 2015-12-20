@@ -78,9 +78,9 @@ void Tab::startSegmentation()
     myTimer.start();
     Segmentation seg(fileName.toStdString(), seedImgName.toStdString());
     qDebug()<<"SEGMENTATION in "<<myTimer.elapsed();
-    //Convert Mat to QImage
-    ui->label_seg->setPixmap(QPixmap::fromImage(seg.getSegmentedImage()));
 
-    //delete seed image
-
+    QVector<QImage> segmentedQImages = QVector<QImage>();
+    QImage contourQImage;
+    seg.getSegmentedImage(segmentedQImages, contourQImage);
+    ui->label_seg->setPixmap(QPixmap::fromImage(contourQImage));
 }
