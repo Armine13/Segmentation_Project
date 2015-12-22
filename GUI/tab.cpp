@@ -43,8 +43,18 @@ void Tab::openImage(QString fName)
 
     qDebug()<< fileName;
     //make the label invisible and instead display the image
+
     if (ui->label_image->isVisible())  ui->label_image->setVisible(false);
+    ui->horizontalLayout->removeWidget(ui->label_image);
+
+    QSpacerItem* hspacer = new QSpacerItem(100,100);
+    QSpacerItem* hspacer2 = new QSpacerItem(100,100);
+//    hspacer->setAlignment(Qt::Horizontal);
+//    hspacer2->setAlignment(Qt::Horizontal);
+    //    hspacer->spacerItem();
+    ui->horizontalLayout->addSpacerItem(hspacer);
     ui->horizontalLayout->addWidget(scribbleImage);
+    ui->horizontalLayout->addSpacerItem(hspacer2);
 
     // create the seed image, with name = <filename> + "seed.bmp"
     seedImgName = fileName;
@@ -82,5 +92,7 @@ void Tab::startSegmentation()
     QVector<QImage> segmentedQImages = QVector<QImage>();
     QImage contourQImage;
     seg.getSegmentedImage(segmentedQImages, contourQImage);
-    ui->label_seg->setPixmap(QPixmap::fromImage(contourQImage));
+    ui->label_seg_1->setPixmap(QPixmap::fromImage(segmentedQImages[0]));
+    ui->label_seg->setPixmap(QPixmap::fromImage(segmentedQImages[1]));
+    ui->label_cont->setPixmap(QPixmap::fromImage(contourQImage));
 }
