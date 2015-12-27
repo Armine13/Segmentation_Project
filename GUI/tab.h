@@ -22,6 +22,7 @@ public:
     QString getOpenImageName() const;
     void startSegmentation();
     bool isImageLoaded() const;
+    void saveImages(const QString) const;
 
 private:
     Ui::Tab *ui;
@@ -30,6 +31,8 @@ private:
     QString fileName;
     QString seedImgName;
     bool imgOpen;
+    QVector<QImage> segmentedQImages;
+    QImage contourQImage;
 };
 
 #endif // TAB_H

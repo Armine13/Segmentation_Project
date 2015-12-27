@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QStyleOption>
 #include "scribblearea.h"
 
 //! [0]
@@ -20,7 +21,7 @@ ScribbleArea::ScribbleArea(QWidget *parent)
 ScribbleArea::~ScribbleArea()
 {
 
-//    saveImage("seed", &selectionImage);
+    //    saveImage("seed", &selectionImage);
 }
 void ScribbleArea::openImage(const QString &fileName)
 {
@@ -39,9 +40,9 @@ void ScribbleArea::openImage(const QString &fileName)
 }
 
 void ScribbleArea::createSeedImage(const QString &fileName)
-{qDebug()<<"createSeedImage";
+{
     //create empty image with the same size as the opened image
-//    selectionImage = QImage((&(image.size())) ;
+    //    selectionImage = QImage((&(image.size())) ;
     selectionImage = QImage(image.size(), QImage::Format_RGB32);
     qDebug()<<selectionImage.size();
     //set background color to white
@@ -80,11 +81,16 @@ void ScribbleArea::mouseReleaseEvent(QMouseEvent *event)
 }
 
 void ScribbleArea::paintEvent(QPaintEvent *event)
-
 {
     QPainter painter(this);
     QRect dirtyRect = event->rect();
     painter.drawImage(dirtyRect, image, dirtyRect);
+
+    //http://stackoverflow.com/questions/7276330/qt-stylesheet-for-custom-widget
+    // This enables styling of the widget
+    QStyleOption opt;
+    opt.init(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &painter, this);
 }
 
 void ScribbleArea::drawLineTo(const QPoint &endPoint)
@@ -98,7 +104,7 @@ void ScribbleArea::drawLineTo(const QPoint &endPoint)
     painter.drawLine(lastPoint, endPoint);
 
     painter2.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
-                        Qt::RoundJoin));
+                         Qt::RoundJoin));
     painter2.drawLine(lastPoint, endPoint);
 
     int rad = (myPenWidth / 2) + 2;

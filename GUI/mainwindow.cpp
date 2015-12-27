@@ -150,3 +150,12 @@ void MainWindow::on_actionExit_triggered()
 
     QCoreApplication::quit();
 }
+
+void MainWindow::on_actionSaveAs_triggered()
+{
+    QString imagePath = QFileDialog::getSaveFileName(this,tr("Save File"),"",tr("JPEG (*.jpg *.jpeg);;PNG (*.png)" ));
+
+    // Save images through the class Tab
+    tabsVector[ui->tabWidget->currentIndex()]->saveImages(imagePath);
+
+}
