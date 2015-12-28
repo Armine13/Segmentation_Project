@@ -17,14 +17,18 @@ SOURCES += main.cpp\
     GUI/scribblearea.cpp \
     GUI/segmentationmarkerwidget.cpp \
     GUI/tab.cpp \
-    segmentation/segmentation.cpp
+    segmentation/segmentationcore.cpp \
+    segmentation/segmentationdata.cpp \
+    segmentation/segmentimage.cpp
 
 HEADERS  += GUI/mainwindow.h \
     GUI/markerbutton.h \
     GUI/scribblearea.h \
     GUI/segmentationmarkerwidget.h \
     GUI/tab.h \
-    segmentation/segmentation.h
+    segmentation/segmentationcore.h \
+    segmentation/segmentationdata.h \
+    segmentation/segmentimage.h
 
 FORMS    += GUI/mainwindow.ui \
     GUI/tab.ui

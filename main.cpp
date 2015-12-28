@@ -9,3 +9,7 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+
+
+//http://tango.freedesktop.org/Tango_Icon_Library
+//http://asmaloney.com/2013/11/code/converting-between-cvmat-and-qimage-or-qpixmap/

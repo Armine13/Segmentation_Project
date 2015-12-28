@@ -22,17 +22,17 @@ private slots:
     void on_actionLoadImage_triggered();
     void on_actionShowMainToolbar_triggered();
     void on_actionShowSegmentationToolbar_triggered();
-    void on_actionSet_Number_of_Classes_triggered();
     void on_actionClose_triggered();
     void on_penColorChanged(QColor);
     void on_actionStart_Segmentation_triggered();
-//    void on_tabCloseRequested(int index);
 
     void on_tabWidget_tabCloseRequested(int index);
 
     void on_actionExit_triggered();
 
     void on_actionSaveAs_triggered();
+
+    void on_actionAbout_triggered();
 
 private:
     Ui::MainWindow *ui;

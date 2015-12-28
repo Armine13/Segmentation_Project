@@ -52,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>562</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -64,27 +64,11 @@
     <addaction name="actionClose"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuTools">
-    <property name="title">
-     <string>Tools</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuWindow">
-    <property name="title">
-     <string>Window</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
-   </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-    <addaction name="actionUndo"/>
-    <addaction name="actionRedo"/>
+    <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -98,16 +82,12 @@
      <string>Segmentation</string>
     </property>
     <addaction name="actionLoadImage"/>
-    <addaction name="actionSet_Number_of_Classes"/>
     <addaction name="separator"/>
     <addaction name="actionStart_Segmentation"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
-   <addaction name="menuEdit"/>
    <addaction name="menuSegmentation"/>
-   <addaction name="menuTools"/>
-   <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -130,8 +110,6 @@
    <addaction name="actionNew"/>
    <addaction name="actionSaveAs"/>
    <addaction name="actionClose"/>
-   <addaction name="actionUndo"/>
-   <addaction name="actionRedo"/>
   </widget>
   <widget class="QToolBar" name="SegmentationToolBar">
    <property name="windowTitle">
@@ -151,7 +129,7 @@
     <string>Save As</string>
    </property>
    <property name="toolTip">
-    <string>Save File</string>
+    <string>Save Files</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -184,22 +162,6 @@
     <string>Ctrl+W</string>
    </property>
   </action>
-  <action name="actionUndo">
-   <property name="text">
-    <string>Undo</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Z</string>
-   </property>
-  </action>
-  <action name="actionRedo">
-   <property name="text">
-    <string>Redo</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Y</string>
-   </property>
-  </action>
   <action name="actionShowMainToolbar">
    <property name="checkable">
     <bool>true</bool>
@@ -227,14 +189,6 @@
     <string>Show Segmentation Toolbar</string>
    </property>
   </action>
-  <action name="actionSet_Number_of_Classes">
-   <property name="text">
-    <string>Set Number of Classes</string>
-   </property>
-   <property name="toolTip">
-    <string>Set Number of Classes for Segmentation</string>
-   </property>
-  </action>
   <action name="actionSelect_Marker">
    <property name="enabled">
     <bool>true</bool>
@@ -252,6 +206,11 @@
    </property>
    <property name="text">
     <string>Start Segmentation</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

@@ -4,6 +4,7 @@
 MarkerButton::MarkerButton(QWidget *parent) :
     QToolButton(parent)
 {
+    //Initialize button parameters
     buttonIndex = -1;
     setAutoRaise(true);
     color = QColor();
@@ -11,7 +12,7 @@ MarkerButton::MarkerButton(QWidget *parent) :
 MarkerButton::MarkerButton(int index, QWidget *parent) :
     QToolButton(parent)
 {
-    setIndex(index);
+    setIndex(index);//Index of button in order it is displayed
     setAutoRaise(true);
 }
 void MarkerButton::setIndex(int index)

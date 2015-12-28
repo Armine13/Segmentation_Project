@@ -1,5 +1,4 @@
 // Scribble QT example
-//#include <QtWidgets>
 #include <QImage>
 #include <QString>
 #include <QDebug>
@@ -8,7 +7,6 @@
 #include <QStyleOption>
 #include "scribblearea.h"
 
-//! [0]
 ScribbleArea::ScribbleArea(QWidget *parent)
     : QWidget(parent)
 {
@@ -42,9 +40,8 @@ void ScribbleArea::openImage(const QString &fileName)
 void ScribbleArea::createSeedImage(const QString &fileName)
 {
     //create empty image with the same size as the opened image
-    //    selectionImage = QImage((&(image.size())) ;
+    //selectionImage is where seeds are drawn
     selectionImage = QImage(image.size(), QImage::Format_RGB32);
-    qDebug()<<selectionImage.size();
     //set background color to white
     selectionImage.fill(qRgb(255, 255, 255));
 }
@@ -113,10 +110,8 @@ void ScribbleArea::drawLineTo(const QPoint &endPoint)
     lastPoint = endPoint;
 }
 
-bool ScribbleArea::saveSeedImage(QString fName, const char *fileFormat)
+bool ScribbleArea::saveSeedImage(QString fName)
 {
-    //TODO: this function must be able to save multiple formats
-
     //The seed image will be saved into the resources folder in the project directory
     if (selectionImage.save(fName)) {
         return true;
@@ -125,6 +120,6 @@ bool ScribbleArea::saveSeedImage(QString fName, const char *fileFormat)
     }
 }
 const QImage& ScribbleArea::getSelection()
-{
+{//Returns the drawn seed image
     return selectionImage;
 }

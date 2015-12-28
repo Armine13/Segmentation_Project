@@ -15,14 +15,15 @@ class Tab : public QWidget
 public:
     Tab(QWidget *parent = 0);
     int getNClasses() const;
-    void setNClasses(int n);
     void openImage(QString);
     ~Tab();
     void setPenColor(QColor);
     QString getOpenImageName() const;
     void startSegmentation();
     bool isImageLoaded() const;
+    bool isSegmented() const;
     void saveImages(const QString) const;
+
 
 private:
     Ui::Tab *ui;
@@ -31,6 +32,7 @@ private:
     QString fileName;
     QString seedImgName;
     bool imgOpen;
+    bool segmented;
     QVector<QImage> segmentedQImages;
     QImage contourQImage;
 };

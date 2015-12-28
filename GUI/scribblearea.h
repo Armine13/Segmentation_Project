@@ -6,7 +6,8 @@
 #include <QPoint>
 #include <QWidget>
 
-//! [0]
+// Copied and modified from http://doc.qt.io/qt-5/qtwidgets-widgets-scribble-example.html
+
 class ScribbleArea : public QWidget
 {
     Q_OBJECT
@@ -16,7 +17,7 @@ public:
     ~ScribbleArea();
     void openImage(const QString &fileName);
     void createSeedImage(const QString &fileName);
-    bool saveSeedImage(QString fileName, const char *fileFormat = 0);
+    bool saveSeedImage(QString fileName);
 
     void setPenColor(const QColor &newColor);
 
@@ -38,6 +39,5 @@ private:
     QImage selectionImage;
     QPoint lastPoint;
 };
-//! [0]
 
 #endif

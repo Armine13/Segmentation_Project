@@ -6,12 +6,15 @@
 #include <QDebug>
 #include <QTabWidget>
 #include <QInputDialog>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle(QString("Seeded Image Segmentation"));
+
     QIcon::setThemeName("TangoMFK");//custom theme for icons
 
     //Create widget for displaying markers
@@ -34,13 +37,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionClose->setIcon(QIcon::fromTheme("document-close"));
     ui->actionExit->setIcon(QIcon::fromTheme("exit"));
     ui->actionLoadImage->setIcon(QIcon::fromTheme("image-x-generic"));
-    ui->actionUndo->setIcon(QIcon::fromTheme("edit-undo"));
-    ui->actionRedo->setIcon(QIcon::fromTheme("edit-redo"));
     ui->actionStart_Segmentation->setIcon(QIcon::fromTheme("start"));
     ui->actionShowMainToolbar->setChecked(true);
     ui->actionShowSegmentationToolbar->setChecked(true);
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -49,7 +49,9 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionNew_triggered()
 {
     openTabsN++;
+    //tabsVector contains all open tabs
     tabsVector.append(new Tab(ui->tabWidget));
+    //Add created tab to tabWidget and give a title
     ui->tabWidget->addTab(tabsVector[openTabsN - 1], QString("New segmentation"));
 
     //enable action loadImage
@@ -59,6 +61,7 @@ void MainWindow::on_actionNew_triggered()
 void MainWindow::on_actionLoadImage_triggered()
 {//This function opens a dialog to choose an image
 
+    //Open a file opening dialog
     QString fileName = QFileDialog::getOpenFileName(this,
                                                     tr("Open Image"), "../seededSegmentation", tr("Image Files (*.png *.jpg *.bmp)"));
 
@@ -88,16 +91,11 @@ void MainWindow::on_actionShowSegmentationToolbar_triggered()
     else ui->SegmentationToolBar->hide();
 }
 
-void MainWindow::on_actionSet_Number_of_Classes_triggered()
-{
-    bool ok;
-    int n = QInputDialog::getInt(this, tr("Set Number of Classes"),
-                                 tr("Set Number of Classes for Segmentation"), 2, 2, 5, 1, &ok);
-    if (ok)
-        SegmentationMarkers->setMarkerNumber(n);
-}
 void MainWindow::on_penColorChanged(QColor clr)
 {
+    // If no tab open or no open image, exit
+    if (openTabsN == 0 || !tabsVector[ui->tabWidget->currentIndex()]->isImageLoaded()) return;
+
     // pass the selected pen color to the currently open tab widget
     tabsVector[ui->tabWidget->currentIndex()]->setPenColor(clr);
 }
@@ -120,7 +118,10 @@ void MainWindow::on_actionStart_Segmentation_triggered()
 
 void MainWindow::on_actionClose_triggered()
 {
-    //triggered from File menu
+    // If no tab open , exit
+    if (openTabsN == 0 )
+        return;
+
     // call on_tabCloseRequested to close the widget
     on_tabWidget_tabCloseRequested(ui->tabWidget->currentIndex());
 }
@@ -140,8 +141,7 @@ void MainWindow::on_tabWidget_tabCloseRequested(int index)
     //if no open tabs left, disable action "open image"
     if (openTabsN == 0)
     {
-        qDebug()<<"no open tabs";
-//        ui->actionLoadImage->setDisabled(true);
+        ui->actionLoadImage->setDisabled(true);
     }
 }
 
@@ -153,9 +153,24 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actionSaveAs_triggered()
 {
-    QString imagePath = QFileDialog::getSaveFileName(this,tr("Save File"),"",tr("JPEG (*.jpg *.jpeg);;PNG (*.png)" ));
+    // If no tab open , exit
+    if (openTabsN == 0 )
+        return;
 
-    // Save images through the class Tab
-    tabsVector[ui->tabWidget->currentIndex()]->saveImages(imagePath);
+    //Save image only if segmentation was successfully completed
+    if (tabsVector[ui->tabWidget->currentIndex()]->isSegmented())
+    {
+        QString imagePath = QFileDialog::getSaveFileName(this,tr("Save File"),"",tr("JPEG (*.jpg *.jpeg);;PNG (*.png)" ));
 
+        // Save images through the class Tab
+        if (!imagePath.isEmpty())
+            tabsVector[ui->tabWidget->currentIndex()]->saveImages(imagePath);
+    }
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QMessageBox* dlg;
+    dlg->about(this,"About Seeded Segmentation","This application is the implementation of \"Laplacian"
+               "Coordinates for Seeded Image Segmentation\", Casaca et al., 2014.\n Author: Armine Vardazaryan");
 }

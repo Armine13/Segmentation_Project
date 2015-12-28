@@ -17,10 +17,9 @@ public:
     ~SegmentationMarkerWidget();
     int getMarkerNumber() const;
     void setMarkerNumber(int n);
-    static QColor getColorFromIndex(int index);
+    QColor getColorFromIndex(int index);
 
 private slots:
-    bool numberOfMarkersChanged(int value);
     void on_button_clicked();
 signals:
     void colorSelected(QColor);
@@ -28,15 +27,12 @@ signals:
 private:
 
     int nMarkers;
-    int minMarkers;
-    int maxMarkers;
     int clickedColorIndex;
-    static QVector< QColor> colorList;
+    QVector< QColor> colorList;
 
     void createMarkers();
 
     QHBoxLayout* layout;
-    QSpinBox* spinBox;
     QVector <MarkerButton* > colorButton;
 };
 
